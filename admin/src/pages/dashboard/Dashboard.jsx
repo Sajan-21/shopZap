@@ -1,12 +1,12 @@
-import React from 'react'
-import Sidebar from '../../components/ui-components/sidebar/Sidebar'
+import React from "react";
+import Sidebar from "../../components/ui-components/sidebar/Sidebar";
 
 function Dashboard() {
   return (
-    <div>
-        <Sidebar />
+    <div className="bg-slate-300 flex">
+      <Sidebar />
     </div>
-  )
+  );
 }
 
-export default Dashboard
+export default Dashboard;
