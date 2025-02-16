@@ -4,6 +4,47 @@ const category = require("../db/models/category");
 const subCategory = require("../db/models/subCategory");
 const mongoose = require("mongoose");
 
+exports.getAllusers = async function(req, res) {
+    try {
+        let usersList = await users.find().populate('orders').populate('wishList').populate('cartList');
+
+        return res.status(200).json({
+            success : true,
+            statusCode : 200,
+            data : usersList
+        });
+    } catch (error) {
+        console.log("error : ",error);
+        
+        return res.status(500).json({
+            success : false,
+            statusCode : 500,
+            message : error.message ? error.message : error
+        })
+    }
+}
+
+exports.getUser = async function(req, res) {
+    try {
+        let userId = req.params.userId;
+        let user = await users.findOne({_id : userId}).populate('orders').populate('wishList').populate('cartList');
+
+        return res.status(200).json({
+            success : true,
+            statusCode : 200,
+            data : user
+        })
+    } catch (error) {
+        console.log("error : ",error);
+        
+        return res.status(500).json({
+            success : false,
+            statusCode : 500,
+            message : error.messagge ? error.message : error
+        });
+    }
+}
+
 exports.addCategory = async function(req, res) {
     try {
         let body = req.body;

@@ -3,6 +3,7 @@ const subCategory = require("../db/models/subCategory");
 const category = require('../db/models/category');
 const users = require('../db/models/users');
 const orders = require('../db/models/orders');
+const reviews = require('../db/models/reviews');
 const mongoose = require("mongoose");
 
 exports.getProducts = async function(req, res) {
@@ -48,7 +49,7 @@ exports.getProducts = async function(req, res) {
             filter = {}
         }
 
-        let productsList = await products.find(filter).populate('category', 'subCategory', 'reviews');
+        let productsList = await products.find(filter).populate('category').populate('subCategory').populate('reviews');
 
         return res.status(201).json({
             success : true,

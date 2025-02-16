@@ -9,6 +9,8 @@ function setAccessController(accessType) {
     }
 }
 
+router.get('/get-users',setAccessController("1"),adminController.getAllusers);
+router.get('/get-user/:userId',setAccessController("1"),adminController.getUser);
 router.post('/add-category',setAccessController("1"), adminController.addCategory);
 router.post('/add-subCategory/:categoryName', setAccessController("1"), adminController.addSubCategory);
 router.patch('/block-user/:userId',setAccessController("1"), adminController.blockUser);
