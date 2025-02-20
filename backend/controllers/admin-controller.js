@@ -2,6 +2,7 @@ const products = require("../db/models/products");
 const users = require("../db/models/users");
 const category = require("../db/models/category");
 const subCategory = require("../db/models/subCategory");
+const orders = require("../db/models/orders");
 const mongoose = require("mongoose");
 
 exports.getAllusers = async function(req, res) {
@@ -41,6 +42,24 @@ exports.getUser = async function(req, res) {
             success : false,
             statusCode : 500,
             message : error.messagge ? error.message : error
+        });
+    }
+}
+
+exports.getOrders = async function(req, res) {
+    try {
+        let ordersList = await orders.find().populate("product").populate("buyer").populate("seller");
+        return res.status(200).json({
+            success : true,
+            statusCode : 200,
+            data : ordersList
+        });
+    } catch (error) {
+        console.log("error : ",error);
+        return res.status(500).json({
+            success : false,
+            statusCode : 500,
+            message : error.message ? error.message : error
         });
     }
 }

@@ -14,6 +14,7 @@ app.use(cors());
 app.use(express.static('../client'));
 app.use(express.urlencoded({extended : true}));
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
 app.use(authRouter);
 app.use(adminRouter);
 app.use(sellerRouter);
